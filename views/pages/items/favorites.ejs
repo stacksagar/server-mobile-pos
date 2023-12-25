@@ -1,0 +1,18 @@
+<%-include("../../partials/header.ejs")-%>
+
+<section class="section_gap bg-gray-100">
+  <div class="content">
+    <h2 class="w-full text-center xl:text-left">Favorites Products</h2>
+    <br />
+    <div class="grid grid-cols-1 gap-4 lg:gap-6 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <% if (products?.length < 1) { %>
+      <h3 class="pt-20 pb-40 text-yellow-600">Not Found!</h3>
+
+      <% }%> <% products?.forEach(product => { %> <%-
+      include('./product-box.ejs', {product}) %> <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<%-include("../../partials/footer.ejs")-%>

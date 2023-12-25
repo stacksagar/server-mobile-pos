@@ -1,0 +1,94 @@
+<div class="flex-1 space-y-8">
+  <div class="border border-slate-200 dark:border-slate-700 rounded-xl">
+    <div class="px-8 py-6">
+      <h3 class="text-slate-700 dark:text-slate-300 flex items-center gap-2">
+        <i class="fa-solid fa-address-book"></i>
+        <span class="uppercase">SHIPPING ADDRESS</span>
+      </h3>
+    </div>
+
+    <div class="border-t border-slate-200 dark:border-slate-700 px-6 py-7 space-y-4 sm:space-y-6 block">
+      <div class="grid grid-cols-12 gap-x-4 gap-y-8">
+        <div class="relative w-full col-span-6">
+          <input name="userId" hidden type="text" value="<%=user?.id%>" />
+          <input name="name" value="<%=user?.name%>" class="peer mt-input" placeholder=" " />
+          <label class="mt-input-label before:content[' '] after:content[' ']">
+            Name
+          </label>
+        </div>
+
+        <div class="relative w-full col-span-6">
+          <div class="absolute text-blue-gray-500 inset-y-0 right-2 my-auto flex items-center justify-center h-full">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <input name="email" value="<%=user?.email%>" class="peer mt-input" placeholder=" " />
+          <label class="mt-input-label before:content[' '] after:content[' ']">
+            Email
+          </label>
+        </div>
+
+        <div class="relative w-full col-span-6">
+          <input name="phone" value="<%=user?.phone%>" class="peer mt-input" placeholder=" " />
+          <label class="mt-input-label before:content[' '] after:content[' ']">
+            Phone
+          </label>
+        </div>
+        <div class="relative w-full col-span-6">
+          <input name="city" value="<%=user?.city%>" class="peer mt-input" placeholder=" " />
+          <label class="mt-input-label before:content[' '] after:content[' ']">
+            City
+          </label>
+        </div>
+
+        <div class="relative w-full col-span-8">
+          <input name="address" value="<%=user?.address%>" class="peer mt-input" placeholder=" " />
+          <label class="mt-input-label before:content[' '] after:content[' ']">
+            Address
+          </label>
+        </div>
+        <div class="relative w-full col-span-4">
+          <input name="postcode" value="<%=user?.postcode%>" class="peer mt-input" placeholder=" " />
+          <label class="mt-input-label before:content[' '] after:content[' ']">
+            ZIP / Postal
+          </label>
+        </div>
+        <div class="col-span-full">
+          <label data-ripple-dark="true" class="flex items-center gap-1.5 p-1 rounded" for="saveAddressForFuture">
+            <input class="w-4 h-4 focus:ring" type="checkbox" name="saveAddressForFuture" id="saveAddressForFuture" />
+            <span class="text-sm font-light">
+              Wanna save this address and informations for future?
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="border border-slate-200 dark:border-slate-700 rounded-xl">
+    <div class="px-8 py-6">
+      <h3 class="text-slate-700 dark:text-slate-300 flex items-center gap-2">
+        <i class="fa-regular fa-credit-card"></i>
+        <span class="uppercase">Payment Method</span>
+      </h3>
+    </div>
+
+    <div class="border-t border-slate-200 dark:border-slate-700 px-6 py-7 space-y-4 sm:space-y-6 block">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
+        <% paymentMethods?.forEach((method)=>{ %>
+        <label data-method="<%=method?.name%>" for="<%=method?.name%>" class="paymentLabel border p-4 rounded bg-gray-100 relative">
+          <input class="absolute top-1 sm:top-3 right-1 sm:right-3 w-4 sm:w-6 h-4 sm:h-6 2xl:w-7 2xl:h-7 border-4" id="<%=method?.name%>" name="payment_method" value="<%=method?.name%>" type="radio" required />
+          <div class="space-y-2 pt-2">
+            <img class="max-h-[40px] max-w-[75px] sm:max-w-[100px]" src="<%=method?.logo%>" alt="" />
+            <p class="text-xs sm:text-base font-medium"><%=method?.name%></p>
+          </div>
+        </label>
+        <%})%>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>

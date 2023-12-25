@@ -11,10 +11,8 @@ const sequelize = new Sequelize({
 sequelize
   .authenticate()
   .then(() => console.log(`DB Connected`))
-  .catch((error) => console.log(`ERROR: ${error?.message}`));
+  .catch((error) => console.log(`DB Connection ERROR: ${error?.message}`));
 
-async () => {
-  await sequelize.sync();
-};
+sequelize.sync();
 
 export default sequelize;

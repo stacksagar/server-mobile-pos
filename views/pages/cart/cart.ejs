@@ -1,0 +1,18 @@
+<%-include("../../partials/header.ejs")-%>
+
+
+<section class="section_gap">
+  <div class="content">
+    <div class="p-8 bg-gray-50 dark:bg-gray-800">
+      <h2 class="mb-8 text-4xl font-bold dark:text-gray-400">Your Cart</h2>
+      <div class="flex flex-wrap -mx-4">
+        <%- include('./cart.products.ejs') %>
+        <%- include('./cart.details.ejs') %>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<%-include("../../partials/footer.ejs")-%>

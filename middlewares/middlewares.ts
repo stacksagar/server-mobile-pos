@@ -7,8 +7,8 @@ import corsOptions from "./corsOptions.";
 const middlewares = [
   morgan("dev"),
 
-  express.static("uploads"),
   express.static("public"),
+  express.static("uploads"),
 
   credentials,
   corsOptions,

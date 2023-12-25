@@ -1,0 +1,35 @@
+<% if (setting?.banner_width) { %>
+<div class="slider full" id="slider1">
+  <!-- Slides -->
+  <% setting?.banners?.forEach((banner)=>{ %>
+  <div class="banner_link cursor-pointer rounded overflow-hidden" data-link="<%=banner?.link%>" style="background-image:url(<%=banner?.img%>)"></div>
+  <%})%>
+
+  <!-- The Arrows -->
+  <button class="left sliderPrev">
+    <i class="fa fa-chevron-left"></i>
+  </button>
+
+  <button class="right sliderNext" style="z-index:2; position:absolute;">
+    <i class="fa fa-chevron-right"></i>
+  </button>
+</div>
+<% } else { %>
+<div class="content">
+  <div class="slider mt-10 sm:my-10" id="slider1">
+    <!-- Slides -->
+    <% setting?.banners?.forEach((banner)=>{ %>
+    <div class="banner_link cursor-pointer rounded overflow-hidden" data-link="<%=banner?.link%>" style="background-image:url(<%=banner?.img%>)"></div>
+    <%})%>
+
+    <!-- The Arrows -->
+    <button class="left sliderPrev">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <button class="right sliderNext" style="z-index:2; position:absolute;">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+<% } %>

@@ -1,0 +1,238 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Material Icons Link -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="shortcut icon" href="<%=setting?.favicon%>" type="image/x-icon" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/accessible-slick-theme.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/custom.css" type="text/css" />
+
+  <title><%=setting?.site_title%></title>
+</head>
+
+</html>
+
+<body>
+  <header class="header bg-gray-100 border-b font-poppins dark:bg-gray-800 dark:border-gray-800 sticky top-0 z-[99999999999999999999]" style="
+      background: <%=setting?.header_bg%>;
+      color: <%=setting?.header_text%>;
+    ">
+    <div class="content" x-data="{open:false}">
+      <div class="flex justify-between h-[100px]">
+        <div class="flex items-center justify-between w-full">
+          <!-- Large Screen - Header Left -->
+          <div class="flex items-center gap-2">
+            <button class="toggle-mobile-sidebar flex items-center px-3 py-2 focus:border border-blue-200 rounded lg:hidden">
+              <i class="fa fa-bars"></i>
+            </button>
+            <a href="/" class="text-2xl text-gray-700 dark:text-gray-400">
+              <img class="w-36 md:w-60 max-h-[60px]" src="<%=setting?.header_logo%>" alt="" />
+            </a>
+          </div>
+
+          <!-- Mobile Nav Toggler -->
+
+          <!-- Large Screen - Header Right -->
+          <div class="items-center flex gap-x-10 px-4">
+            <button id="toggleMobileSearch" class="text-2xl w-fit ml-auto md:hidden">
+              <i class="fa fa-search"></i>
+            </button>
+            <div id="mobilSearch" class="transform scale-y-0 md:scale-y-100 transition-all origin-top bg-white h-[50px] absolute md:static top-[100px] right-1">
+              <form action="/items" method="get" class="flex">
+                <div class="h-[50px] flex items-center relative">
+                  <select name="category" class="!text-black absolute inset-y-0 my-auto h-[45px] left-0 pl-2 overflow-hidden rounded focus:outline-none">
+                    <option value="">All Categories</option>
+                    <% categories?.forEach(category => { %> <% if
+                    (category?.slug === data?.category_slug) { %>
+                    <option selected value="<%=category?.slug%>">
+                      <a class="whitespace-nowrap flex items-center gap-1 p-3" href="/items?category=<%=category?.slug%>">
+                        <% if (category?.icon) { %>
+                        <img class="w-5" src="<%=category?.icon%>" alt="" />
+                        <% } else { %>
+                        <i class="fa-solid fa-plate-wheat"></i>
+                        <% } %>
+                        <span> <%=category?.name%> </span>
+                      </a>
+                    </option>
+                    <% } else { %>
+                    <option value="<%=category?.slug%>">
+                      <a class="whitespace-nowrap flex items-center gap-1 p-3" href="/items?category=<%=category?.slug%>">
+                        <% if (category?.icon) { %>
+                        <img class="w-5" src="<%=category?.icon%>" alt="" />
+                        <% } else { %>
+                        <i class="fa-solid fa-plate-wheat"></i>
+                        <% } %>
+                        <span> <%=category?.name%> </span>
+                      </a>
+                    </option>
+                    <% } %> <% }) %>
+                  </select>
+
+                  <input name="search" type="search" value="<%=data?.search_text%>" placeholder="Search..." class="pl-[170px] input pr-4 py-3 2xl:min-w-[550px]" />
+                  <button type="submit" class="absolute inset-y-0 my-auto right-0 bg-orange-600 text-white px-4 py-2">
+                    <i class="fa fa-search"></i>
+                    <span class="hidden md:inline-block">Search</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="items-center justify-end hidden lg:flex dark:text-gray-400 space-x-8">
+              <a href="/favorites" class="relative">
+                <div class="text-pink-600 text-xl">
+                  <i class="fa-solid fa-heart"></i>
+                  <small class="totalFavoriteItems absolute bg-orange-600 text-white w-5 h-5 text-xs rounded-full -right-2.5 -bottom-2.5 flex items-center justify-center">
+                    <%=totalFavorites %>
+                  </small>
+                </div>
+              </a>
+
+              <a href="/cart" class="relative">
+                <div class="text-xl">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <small class="totalCartItems absolute bg-orange-600 text-white w-5 h-5 text-xs rounded-full -right-2.5 -bottom-2.5 flex items-center justify-center">
+                  0
+                </small>
+              </a>
+
+              <% if (user) { %> <%-
+              include('../components/common/profile-menu.ejs') %> <% } else { %>
+              <div class="space-x-1">
+                <a href="/login" data-ripple-dark="true" class="mt-btn bg-green-600 text-white !px-4 space-x-2">
+                  <i class="fa fa-lock"> </i>
+                  <span> Login </span>
+                </a>
+
+                <a href="/register" data-ripple-dark="true" class="mt-btn bg-orange-600 text-white !px-4 space-x-2">
+                  <i class="fa fa-user"> </i>
+                  <span> Register </span>
+                </a>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Sidebar -->
+      <div id="mobile-sidebar" class="-translate-x-full border-r flex-col justify-between absolute inset-0 z-50 h-screen p-3 text-gray-700 duration-500 transform shadow-md dark:bg-gray-800 bg-white w-80 lg:hidden lg:transform-none lg:relative">
+        <div class="flex justify-between">
+          <a class="p-2 text-2xl font-bold dark:text-gray-400" href="/">
+            <img class="w-44" src="<%=setting?.header_logo%>" alt="" />
+          </a>
+
+          <button class="toggle-mobile-sidebar p-2 rounded-md hover:text-blue-300 lg:hidden dark:text-gray-300">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+
+
+        <ul class="px-5 text-left mt-5 space-y-4">
+
+
+          <li class="border-b pb-4 font-semibold">
+            <a href="/" class="text-sm text-gray-700 hover:text-blue-400 dark:text-gray-100">
+              <i class="fa fa-home"></i> Home</a>
+          </li>
+
+          <li class="border-b pb-4 font-semibold">
+            <a href="/my-profile" class="text-sm text-gray-700 hover:text-blue-400 dark:text-gray-100">
+              <i class="fa fa-user"></i> My Account</a>
+          </li>
+
+          <li class="border-b pb-4 font-semibold">
+            <a href="/cart" class="relative text-sm text-gray-700 hover:text-blue-400 dark:text-gray-100 flex items-center gap-2">
+
+              <div class="text-lg">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <small class="totalCartItems absolute bg-orange-600 text-white w-5 h-5 text-xs rounded-full right-0 inset-y-0 my-auto flex items-center justify-center">
+                0
+              </small>
+
+
+              <span> Cart </span>
+            </a>
+          </li>
+
+          <li class="border-b pb-4 font-semibold">
+            <a href="/favorites" class="relative text-sm text-gray-700 hover:text-blue-400 dark:text-gray-100 flex items-center gap-2">
+
+
+              <div class="text-lg">
+                <i class="fa-solid fa-heart"></i>
+              </div>
+              <small class="totalCartItems absolute bg-orange-600 text-white w-5 h-5 text-xs rounded-full right-0 inset-y-0 my-auto flex items-center justify-center">
+                <%=totalFavorites %>
+              </small>
+
+              <span> Favorites </span>
+            </a>
+          </li>
+
+          <li class="border-b pb-4 font-semibold">
+            <a href="/contact" class="text-sm text-gray-700 hover:text-blue-400 dark:text-gray-100">
+              <i class="fa fa-envelope"></i> Contact</a>
+          </li>
+
+          <% if (user) { %>
+          <li class="border-b pb-4 font-semibold">
+            <a href="/logout" class="text-sm text-gray-700 hover:text-blue-400 dark:text-gray-100">
+              <i class="fa fa-lock"></i> Logout</a>
+          </li>
+          <%} else {%>
+          <div class="flex items-center gap-x-2">
+            <a href="/login" class="mt-btn bg-green-600 text-white space-x-2" type="button" data-ripple-dark="true">
+              <i class="fa-solid fa-lock"></i>
+              Login
+            </a>
+            <a href="/register" class="mt-btn bg-blue-600 text-white space-x-2" type="button" data-ripple-light="true">
+              <i class="fa fa-user"></i>
+              Register
+            </a>
+          </div>
+          <%} %>
+        </ul>
+
+        <div class="mt-auto p-2">
+          <p class="text-lg font-semibold mb-3">
+            <i class="fa fa-headphones"></i> HOTLINE
+            <a class="text-green-600" href="tel:<%=setting?.phone%>"><%=setting?.phone%></a>
+          </p>
+          <p class="font-medium">
+            <i class="fa fa-location-dot"></i> <%=setting?.location%>
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <% if (message) { %>
+  <div class="toast-message success">
+    <i class="fa fa-check-circle"></i>
+    <%=message%>
+    <div class="line"></div>
+  </div>
+  <% } %> <% if (error) { %>
+  <div class="toast-message error">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <%=error%>
+    <div class="line"></div>
+  </div>
+  <% } %> <%- include('./sub-header.ejs') %>
+</body>

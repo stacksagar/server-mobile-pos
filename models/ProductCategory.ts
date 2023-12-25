@@ -1,5 +1,7 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from ".";
+import sequelize from "./connection";
+import { CategoryT } from "../global.types";
+import Product from "./Product";
 
 class ProductCategory extends Model<CategoryT> {}
 
@@ -8,6 +10,10 @@ ProductCategory.init(
     name: {
       type: DataTypes.STRING("40"),
       allowNull: false,
+    },
+    parentId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     slug: {
       type: DataTypes.STRING("60"),
@@ -24,5 +30,11 @@ ProductCategory.init(
     sequelize,
   }
 );
+
+// Product with Category Relation
+Product.belongsTo(ProductCategory, {
+  foreignKey: "categoryId",
+  as: "category",
+});
 
 export default ProductCategory;

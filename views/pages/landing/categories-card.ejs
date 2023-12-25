@@ -1,0 +1,32 @@
+<section class="section_gap bg-gray-50">
+  <div class="content">
+    <div class="flex justify-between items-center">
+      <h2 class="text-center xl:text-left">Categories</h2>
+      <a href="/categories">View All</a>
+    </div>
+    <br />
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-6"
+    >
+      <% categories?.filter((_,i)=>i<6)?.forEach((category)=>{ %>
+      <a
+        style="
+          background: linear-gradient(to right, #00000096, #000000cd),
+            url('<%=category?.icon%>');
+        "
+        class="shadow border block p-3 sm:p-5 bg-no-repeat bg-contain rounded group"
+        href="/items?category=<%=category?.slug%>"
+      >
+        <img
+          src="<%=category?.icon%>"
+          class="w-[100px] sm:w-[130px] h-[100px] sm:h-[130px] ring object-cover mx-auto rounded-full group-hover:scale-105 transition-all"
+          alt=""
+        />
+        <p class="sm:text-xl font-semibold mt-4 text-center text-white">
+          <%=category?.name%>
+        </p>
+      </a>
+      <%})%>
+    </div>
+  </div>
+</section>

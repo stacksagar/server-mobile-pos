@@ -1,0 +1,22 @@
+<!-- header -->
+<%-include("../../partials/header.ejs")-%>
+
+<!-- Slider -->
+<%- include('./header-slider.ejs') %>
+
+<!-- Categories Cards -->
+<%- include('./categories-card.ejs') %>
+
+<% if( offer_products?.length >  0) {  %>
+<!-- Popular Products -->
+<%- include('./offer-products.ejs') %>
+<%}%>
+
+<!-- Popular Products -->
+<%- include('./popular-products.ejs') %>
+
+<!-- Recent Products -->
+<%- include('./recent-products.ejs') %>
+
+<!-- Footer -->
+<%-include("../../partials/footer.ejs")-%>

@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import { not_found, error_response } from "../middlewares/errors";
 import middlewares from "../middlewares/middlewares";

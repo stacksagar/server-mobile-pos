@@ -4,7 +4,10 @@
   "description": "Full Stack POS Application with eCommerce",
   "main": "server.js",
   "scripts": {
-    "dev": "npx ts-node-dev server.ts"
+    "start": "node server.js",
+    "dev": "npx ts-node-dev server.ts",
+    "devcss": "postcss tailwind.css -o public/styles/styles.css -w",
+    "all": "npm-run-all --parallel dev devcss"
   },
   "repository": {
     "type": "git",
@@ -21,22 +24,37 @@
   },
   "homepage": "https://github.com/stacksagar/server-full-stack-pos#readme",
   "dependencies": {
+    "@material-tailwind/html": "^2.1.2",
+    "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.6.5",
-    "sequelize": "^6.35.2"
+    "sequelize": "^6.35.2",
+    "uid": "^2.0.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.6",
     "@types/cors": "^2.8.17",
     "@types/ejs": "^3.1.5",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/morgan": "^1.9.9",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^20.10.5",
+    "autoprefixer": "^10.4.16",
     "morgan": "^1.10.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
     "sequelize-typescript": "^2.1.6",
+    "tailwindcss": "^3.4.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   }
