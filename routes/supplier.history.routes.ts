@@ -13,7 +13,13 @@ supplierHistoryRoutes.get(
   controllers.readAllByPages.bind(controllers)
 );
 
-supplierHistoryRoutes.get("/all", controllers.readAll.bind(controllers));
+supplierHistoryRoutes.get("/all", (...all) => controllers.readAll(...all)());
+supplierHistoryRoutes.get("/by-supplier/:supplierId", (...all) =>
+  controllers.readAll(...all)({
+    where: { supplierId: all[0].params.supplierId },
+  })
+);
+
 supplierHistoryRoutes.get("/:id", (...all) =>
   controllers.readSingle(...all)({
     include: [

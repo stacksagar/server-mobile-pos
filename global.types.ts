@@ -141,6 +141,9 @@ export interface ProductT extends Common {
   supplier?: SupplierT;
   variants?: ProductVariant[];
   custom?: KeyValuePair;
+  total_purchase_amount: number;
+  total_sale_amount: number;
+  with_variant?: boolean;
 }
 
 export interface PageT extends Common {

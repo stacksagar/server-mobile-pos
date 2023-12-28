@@ -21,13 +21,13 @@ Product.init(
     },
 
     sale_price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       defaultValue: 0,
     },
 
     purchase_price: {
       allowNull: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       defaultValue: 0,
     },
 
@@ -39,6 +39,16 @@ Product.init(
 
     in_stock: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+
+    total_purchase_amount: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+    },
+
+    total_sale_amount: {
+      type: DataTypes.FLOAT,
       defaultValue: 0,
     },
 
@@ -94,6 +104,11 @@ Product.init(
       defaultValue: "[]",
       get: getParseIntoJSON("variants"),
       set: setStringifyJSON("variants"),
+    },
+
+    with_variant: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {

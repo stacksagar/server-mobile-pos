@@ -3,15 +3,15 @@ import error_res from "../../utils/error_res";
 import slugGenerator from "../../utils/slug.generator";
 import Product from "../../models/Product";
 import ProductCategory from "../../models/ProductCategory";
-import Supplier from "../../models/Supplier";
 import SupplierHistory from "../../models/SupplierHistory";
 
 export default async function createProduct(req: Request, res: Response) {
   const supplierInvoice = req?.body?.supplierInvoice || {};
-
   try {
     const newProduct = await Product.create({
       ...req.body,
+      purchase_price: req.body?.purchase_price || 0,
+      sale_price: req.body?.sale_price || 0,
       slug: slugGenerator(req?.body?.name),
     });
 

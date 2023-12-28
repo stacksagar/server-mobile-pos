@@ -26,7 +26,6 @@ export default class ModelControllers {
     return async (options?: FindOptions) => {
       const id = req?.params?.id;
 
-      console.log("working...working...working...", id);
       const findOptions: FindOptions = {
         ...(options || {}),
         where: { id },
@@ -69,13 +68,18 @@ export default class ModelControllers {
     }
   }
 
-  async readAll(_req: Request, res: Response) {
-    try {
-      const data = await this.model.findAll();
-      res.status(200).json(data);
-    } catch (error) {
-      return error_res(res, error);
-    }
+  readAll(req: Request, res: Response, _next: NextFunction) {
+    return async (options?: FindOptions) => {
+      const id = req?.params?.id;
+      try {
+        const data = await this.model.findAll({
+          ...(options || {}),
+        });
+        res.status(200).json(data);
+      } catch (error) {
+        return error_res(res, error);
+      }
+    };
   }
 
   async update(req: Request, res: Response) {
