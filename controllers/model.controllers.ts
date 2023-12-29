@@ -70,7 +70,6 @@ export default class ModelControllers {
 
   readAll(req: Request, res: Response, _next: NextFunction) {
     return async (options?: FindOptions) => {
-      const id = req?.params?.id;
       try {
         const data = await this.model.findAll({
           ...(options || {}),

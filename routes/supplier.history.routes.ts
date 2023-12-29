@@ -3,6 +3,7 @@ import ModelControllers from "../controllers/model.controllers";
 import SupplierHistory from "../models/SupplierHistory";
 import Product from "../models/Product";
 import Supplier from "../models/Supplier";
+import User from "../models/User";
 const supplierHistoryRoutes = express.Router();
 
 const controllers = new ModelControllers(SupplierHistory);
@@ -17,6 +18,20 @@ supplierHistoryRoutes.get("/all", (...all) => controllers.readAll(...all)());
 supplierHistoryRoutes.get("/by-supplier/:supplierId", (...all) =>
   controllers.readAll(...all)({
     where: { supplierId: all[0].params.supplierId },
+    include: [
+      {
+        model: Supplier,
+        as: "supplier",
+      },
+      {
+        model: Product,
+        as: "product",
+      },
+      {
+        model: User,
+        as: "user",
+      },
+    ],
   })
 );
 
@@ -30,6 +45,10 @@ supplierHistoryRoutes.get("/:id", (...all) =>
       {
         model: Supplier,
         as: "supplier",
+      },
+      {
+        model: User,
+        as: "user",
       },
     ],
   })

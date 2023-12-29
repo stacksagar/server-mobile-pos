@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./connection";
 import { UserT } from "../global.types";
+import SupplierHistory from "./SupplierHistory";
 
 class User extends Model<UserT> {}
 
@@ -30,5 +31,15 @@ User.init(
     sequelize,
   }
 );
+
+// User with History Relation
+User.hasMany(SupplierHistory, {
+  foreignKey: "userId",
+  as: "histories",
+});
+SupplierHistory.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user",
+});
 
 export default User;

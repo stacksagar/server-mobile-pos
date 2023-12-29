@@ -76,13 +76,16 @@ export interface SaleT extends Common {
 }
 
 export interface SupplierHistoryT extends Common {
-  supplierId?: number;
-  supplier?: SupplierT;
-  productId?: number;
-  product?: ProductT;
   paid_amount: number;
   due_amount: number;
+  supplierId?: number;
+  productId?: number;
+  userId?: number;
+  user?: UserT;
+  supplier?: SupplierT;
+  product?: ProductT;
   total_purchase_amount: number;
+  quantity: number;
 }
 
 export interface SupplierT extends Common {
