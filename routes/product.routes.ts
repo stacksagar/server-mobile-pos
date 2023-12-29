@@ -12,6 +12,7 @@ import readProduct from "../controllers/product/read.product";
 import readStockInProducts from "../controllers/product/read.stock.products";
 import readStockOutProducts from "../controllers/product/read.stockout.products";
 import updateProduct from "../controllers/product/update.product";
+import readStockInAllProducts from "../controllers/product/read.stock.all.products";
 const productRoutes = express.Router();
 
 // Category
@@ -24,6 +25,7 @@ productRoutes.delete("/category/:id", deleteProductCategory);
 
 // Product
 productRoutes.post("/", createProduct);
+productRoutes.get("/stock-in/all", readStockInAllProducts);
 productRoutes.get("/stock-in", readStockInProducts);
 productRoutes.get("/stock-out", readStockOutProducts);
 productRoutes.get("/:id", readProduct);

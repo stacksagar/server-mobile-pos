@@ -3,7 +3,9 @@ import error_res from "../../utils/error_res";
 import Product from "../../models/Product";
 
 export default async function deleteProducts(req: Request, res: Response) {
-  const ids = req.body.ids || [];
+  const ids = req.body.ids || []; 
+
+  console.log('ids ', ids)
   try {
     if (ids?.length < 1) throw new Error("Not found!");
 

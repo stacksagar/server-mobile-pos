@@ -14,7 +14,25 @@ supplierHistoryRoutes.get(
   controllers.readAllByPages.bind(controllers)
 );
 
-supplierHistoryRoutes.get("/all", (...all) => controllers.readAll(...all)());
+supplierHistoryRoutes.get("/all", (...all) =>
+  controllers.readAll(...all)({
+    include: [
+      {
+        model: Product,
+        as: "product",
+      },
+      {
+        model: Supplier,
+        as: "supplier",
+      },
+      {
+        model: User,
+        as: "user",
+      },
+    ],
+  })
+);
+
 supplierHistoryRoutes.get("/by-supplier/:supplierId", (...all) =>
   controllers.readAll(...all)({
     where: { supplierId: all[0].params.supplierId },
@@ -57,7 +75,7 @@ supplierHistoryRoutes.get("/:id", (...all) =>
 supplierHistoryRoutes.put("/:id", controllers.update.bind(controllers));
 
 supplierHistoryRoutes.delete(
-  "/multiples",
+  "/multiple",
   controllers.deleteMultiples.bind(controllers)
 );
 
