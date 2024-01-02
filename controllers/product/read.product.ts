@@ -3,6 +3,7 @@ import error_res from "../../utils/error_res";
 import ProductCategory from "../../models/ProductCategory";
 import Product from "../../models/Product";
 import Supplier from "../../models/Supplier";
+import SupplierHistory from "../../models/SupplierHistory";
 
 export default async function readProduct(req: Request, res: Response) {
   try {
@@ -11,11 +12,14 @@ export default async function readProduct(req: Request, res: Response) {
       include: [
         {
           model: Supplier,
-          as: "supplier",
         },
         {
           model: ProductCategory,
           as: "category",
+        },
+        {
+          model: SupplierHistory,
+          as: "histories",
         },
       ],
     });

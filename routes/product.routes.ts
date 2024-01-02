@@ -13,6 +13,7 @@ import readStockInProducts from "../controllers/product/read.stock.products";
 import readStockOutProducts from "../controllers/product/read.stockout.products";
 import updateProduct from "../controllers/product/update.product";
 import readStockInAllProducts from "../controllers/product/read.stock.all.products";
+import addQuantityProduct from "../controllers/product/add.quantity.product";
 const productRoutes = express.Router();
 
 // Category
@@ -29,6 +30,7 @@ productRoutes.get("/stock-in/all", readStockInAllProducts);
 productRoutes.get("/stock-in", readStockInProducts);
 productRoutes.get("/stock-out", readStockOutProducts);
 productRoutes.get("/:id", readProduct);
+productRoutes.put("/add-quantity", addQuantityProduct);
 productRoutes.put("/:id", updateProduct);
 productRoutes.delete("/multiple", deleteProducts);
 productRoutes.delete("/:id", deleteProduct);

@@ -2,6 +2,7 @@ import express from "express";
 import ModelControllers from "../controllers/model.controllers";
 import Supplier from "../models/Supplier";
 import SupplierHistory from "../models/SupplierHistory";
+import Product from "../models/Product";
 const supplierRoutes = express.Router();
 
 const controllers = new ModelControllers(Supplier);
@@ -12,13 +13,19 @@ supplierRoutes.get(
   controllers.readAllByPages.bind(controllers)
 );
 
-supplierRoutes.get("/all", controllers.readAll.bind(controllers));
+supplierRoutes.get("/all", (...all) => controllers.readAll(...all)());
 supplierRoutes.get("/:id", (...all) =>
   controllers.readSingle(...all)({
-    include: {
-      model: SupplierHistory,
-      as: "histories",
-    },
+    include: [
+      {
+        model: SupplierHistory,
+        as: "histories",
+      },
+
+      {
+        model: Product,
+      },
+    ],
   })
 );
 

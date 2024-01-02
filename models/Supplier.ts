@@ -1,8 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./connection";
-import { SupplierT } from "../global.types";
-import Product from "./Product";
-import SupplierHistory from "./SupplierHistory";
+import { SupplierT } from "../global.types"; 
+import SupplierHistory from "./SupplierHistory"; 
 
 class Supplier extends Model<SupplierT> {}
 
@@ -24,18 +23,17 @@ Supplier.init(
   }
 );
 
-// Supplier with Product Relation
-Supplier.hasMany(Product, { foreignKey: "supplierId", as: "products" });
-Product.belongsTo(Supplier, { foreignKey: "supplierId", as: "supplier" });
-
 // Supplier with History Relation
 Supplier.hasMany(SupplierHistory, {
   foreignKey: "supplierId",
   as: "histories",
 });
+
 SupplierHistory.belongsTo(Supplier, {
   foreignKey: "supplierId",
   as: "supplier",
 });
+
+
 
 export default Supplier;

@@ -4,9 +4,11 @@ import slugGenerator from "../../utils/slug.generator";
 import Product from "../../models/Product";
 import ProductCategory from "../../models/ProductCategory";
 import SupplierHistory from "../../models/SupplierHistory";
+import Supplier from "../../models/Supplier";
 
 export default async function createProduct(req: Request, res: Response) {
   const supplierInvoice = req?.body?.supplierInvoice || {};
+  const supplierId = req?.body?.supplierId;
   try {
     const newProduct = await Product.create({
       ...req.body,
@@ -14,6 +16,10 @@ export default async function createProduct(req: Request, res: Response) {
       sale_price: req.body?.sale_price || 0,
       slug: slugGenerator(req?.body?.name),
     });
+
+    // @ts-ignore
+    // Create association with the single supplier
+    supplierId && newProduct.addSuppliers([supplierId]);
 
     await SupplierHistory.create({
       ...supplierInvoice,

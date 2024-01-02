@@ -95,11 +95,12 @@ export interface SupplierT extends Common {
   phone?: string;
   nid?: string;
   email?: string;
-  total_puchase_amount?: number | string;
-  total_paid?: number | string;
-  total_due?: number | string;
   products?: ProductT[];
   histories?: SupplierHistoryT;
+
+  total_puchase_amount: number | string;
+  total_paid: number | string;
+  total_due: number | string;
 }
 
 export interface UserT extends Common {

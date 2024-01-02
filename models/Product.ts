@@ -1,11 +1,11 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./connection";
-import { ProductT } from "../global.types";
-import ProductCategory from "./ProductCategory";
+import { ProductT } from "../global.types"; 
 import Supplier from "./Supplier";
 import getParseIntoJSON from "../utils/getParseIntoJSON";
 import setStringifyJSON from "../utils/setStringifyJSON";
 import SupplierHistory from "./SupplierHistory";
+import SupplierAndProductRelation from "./ThroughModels/SupplierAndProductRelation";
 
 class Product extends Model<ProductT> {}
 
@@ -117,13 +117,24 @@ Product.init(
   }
 );
 
-Product.hasOne(SupplierHistory, {
-  foreignKey: "productId",
-  as: "history",
+Product.belongsToMany(Supplier, {
+  through: SupplierAndProductRelation,
 });
+
+Supplier.belongsToMany(Product, {
+  through: SupplierAndProductRelation,
+});
+
+
+Product.hasMany(SupplierHistory, {
+  foreignKey: "productId",
+  as: "histories",
+});
+
 SupplierHistory.belongsTo(Product, {
   foreignKey: "productId",
   as: "product",
 });
+
 
 export default Product;

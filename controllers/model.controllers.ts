@@ -69,7 +69,8 @@ export default class ModelControllers {
   }
 
   readAll(req: Request, res: Response, _next: NextFunction) {
-    return async (options?: FindOptions) => {
+    return async (options?: FindOptions) => { 
+      console.log('called ')
       try {
         const data = await this.model.findAll({
           ...(options || {}),
