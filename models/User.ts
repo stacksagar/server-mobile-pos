@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "./connection";
 import { UserT } from "../global.types";
 import SupplierHistory from "./SupplierHistory";
-import SellHistory from "./CustomerHistory";
+import CustomerHistory from "./CustomerHistory";
 
 class User extends Model<UserT> {}
 
@@ -55,9 +55,10 @@ User.hasMany(SupplierHistory, {
   as: "purchase_histories",
 });
 
-SellHistory.belongsTo(User, {
+CustomerHistory.belongsTo(User, {
   foreignKey: "userId",
+  as: "user",
 });
-User.hasMany(SellHistory, { foreignKey: "userId", as: "histories" });
+User.hasMany(CustomerHistory, { foreignKey: "userId", as: "histories" });
 
 export default User;

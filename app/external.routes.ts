@@ -6,6 +6,7 @@ import settingRoutes from "../routes/setting.routes";
 import supplierRoutes from "../routes/supplier.routes";
 import adminPanelRoutes from "../routes/admin.panel.routes";
 import supplierHistoryRoutes from "../routes/supplier.history.routes";
+import customerRoutes from "../routes/customer.routes";
 const router = Router();
 
 // external route start with "/api/__route_name"
@@ -17,6 +18,7 @@ router.use("/product", productRoutes);
 router.use("/admin", adminPanelRoutes);
 router.use("/supplier", supplierRoutes);
 router.use("/supplier-history", supplierHistoryRoutes);
+router.use("/customer", customerRoutes);
 
 const externalRoutes = router;
 export default externalRoutes;

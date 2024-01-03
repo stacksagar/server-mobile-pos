@@ -10,6 +10,7 @@ authRoutes.post("/signup", signupController);
 authRoutes.post("/signin", signinController);
 authRoutes.get("/refresh", refreshController);
 
-authRoutes.get("/users", readUsers);
+// users
+authRoutes.get("/user/all", readUsers);
 
 export default authRoutes;

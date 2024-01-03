@@ -1,6 +1,5 @@
 import express from "express";
 import ModelControllers from "../controllers/model.controllers";
-import Supplier from "../models/Supplier";
 import User from "../models/User";
 import CustomerHistory from "../models/CustomerHistory";
 
@@ -17,10 +16,6 @@ sellHistoryRoutes.get("/all", (...all) =>
   controllers.readAll(...all)({
     include: [
       {
-        model: Supplier,
-        as: "supplier",
-      },
-      {
         model: User,
         as: "user",
       },
@@ -33,11 +28,6 @@ sellHistoryRoutes.get("/by-supplier/:supplierId", (...all) =>
     where: { supplierId: all[0].params.supplierId },
     include: [
       {
-        model: Supplier,
-        as: "supplier",
-      },
-
-      {
         model: User,
         as: "user",
       },
@@ -48,10 +38,6 @@ sellHistoryRoutes.get("/by-supplier/:supplierId", (...all) =>
 sellHistoryRoutes.get("/:id", (...all) =>
   controllers.readSingle(...all)({
     include: [
-      {
-        model: Supplier,
-        as: "supplier",
-      },
       {
         model: User,
         as: "user",
