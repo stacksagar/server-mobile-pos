@@ -12,7 +12,7 @@ Page.init(
     thumbnail: { type: DataTypes.STRING("255"), allowNull: false },
   },
   {
-    tableName: "Pages",
+    tableName: "pages",
     sequelize,
   }
 );

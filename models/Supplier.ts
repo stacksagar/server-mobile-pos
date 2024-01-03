@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./connection";
-import { SupplierT } from "../global.types"; 
-import SupplierHistory from "./SupplierHistory"; 
+import { SupplierT } from "../global.types";
+import SupplierHistory from "./SupplierHistory";
 
 class Supplier extends Model<SupplierT> {}
 
@@ -18,7 +18,7 @@ Supplier.init(
     total_due: { type: DataTypes.FLOAT, allowNull: true },
   },
   {
-    tableName: "Suppliers",
+    tableName: "suppliers",
     sequelize,
   }
 );
@@ -33,7 +33,5 @@ SupplierHistory.belongsTo(Supplier, {
   foreignKey: "supplierId",
   as: "supplier",
 });
-
-
 
 export default Supplier;

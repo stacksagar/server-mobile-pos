@@ -69,8 +69,8 @@ export default class ModelControllers {
   }
 
   readAll(req: Request, res: Response, _next: NextFunction) {
-    return async (options?: FindOptions) => { 
-      console.log('called ')
+    return async (options?: FindOptions) => {
+      console.log("called ");
       try {
         const data = await this.model.findAll({
           ...(options || {}),
@@ -109,7 +109,7 @@ export default class ModelControllers {
     const ids: number[] = req.body?.ids || [];
 
     try {
-      if (ids?.length < 1) return res.json({ message: "Not Found" });
+      if (!ids || ids?.length < 1) return res.json({ message: "Not Found" });
       await this.model.destroy({ where: { id: ids } });
       res.status(204).json({ message: "items deleted!" });
     } catch (error) {

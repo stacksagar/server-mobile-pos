@@ -13,7 +13,7 @@ SupplierAndProductRelation.init(
   },
 
   {
-    tableName: "SupplierAndProductRelation",
+    tableName: "supplierandproductrelation",
     sequelize,
     timestamps: false,
   }

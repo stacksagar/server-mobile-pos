@@ -21,7 +21,7 @@ Setting.init(
     },
   },
   {
-    tableName: "Settings",
+    tableName: "settings",
     sequelize,
   }
 );

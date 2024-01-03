@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./connection";
-import { ProductT } from "../global.types"; 
+import { ProductT } from "../global.types";
 import Supplier from "./Supplier";
 import getParseIntoJSON from "../utils/getParseIntoJSON";
 import setStringifyJSON from "../utils/setStringifyJSON";
@@ -112,7 +112,7 @@ Product.init(
     },
   },
   {
-    tableName: "Products",
+    tableName: "products",
     sequelize,
   }
 );
@@ -125,7 +125,6 @@ Supplier.belongsToMany(Product, {
   through: SupplierAndProductRelation,
 });
 
-
 Product.hasMany(SupplierHistory, {
   foreignKey: "productId",
   as: "histories",
@@ -135,6 +134,5 @@ SupplierHistory.belongsTo(Product, {
   foreignKey: "productId",
   as: "product",
 });
-
 
 export default Product;

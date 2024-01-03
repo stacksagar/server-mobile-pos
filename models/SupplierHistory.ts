@@ -12,7 +12,7 @@ SupplierHistory.init(
     quantity: { type: DataTypes.FLOAT, allowNull: true },
   },
   {
-    tableName: "SupplierHistories",
+    tableName: "supplierhistories",
     sequelize,
   }
 );

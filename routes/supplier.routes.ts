@@ -32,7 +32,7 @@ supplierRoutes.get("/:id", (...all) =>
 supplierRoutes.put("/:id", controllers.update.bind(controllers));
 
 supplierRoutes.delete(
-  "/multiples",
+  "/multiple",
   controllers.deleteMultiples.bind(controllers)
 );
 supplierRoutes.delete("/:id", controllers.deleteSingle.bind(controllers));

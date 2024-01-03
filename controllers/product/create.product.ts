@@ -4,11 +4,11 @@ import slugGenerator from "../../utils/slug.generator";
 import Product from "../../models/Product";
 import ProductCategory from "../../models/ProductCategory";
 import SupplierHistory from "../../models/SupplierHistory";
-import Supplier from "../../models/Supplier";
 
 export default async function createProduct(req: Request, res: Response) {
   const supplierInvoice = req?.body?.supplierInvoice || {};
   const supplierId = req?.body?.supplierId;
+  const adminId = req?.body?.adminId;
   try {
     const newProduct = await Product.create({
       ...req.body,
@@ -23,11 +23,12 @@ export default async function createProduct(req: Request, res: Response) {
 
     await SupplierHistory.create({
       ...supplierInvoice,
-      supplierId: newProduct.dataValues.supplierId,
-      productId: newProduct.dataValues.id,
       total_purchase_amount:
         Number(supplierInvoice?.due_amount) +
         Number(supplierInvoice?.paid_amount),
+      productId: newProduct.dataValues.id,
+      supplierId,
+      userId: adminId,
     });
 
     const product = await Product.findOne({

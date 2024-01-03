@@ -7,8 +7,9 @@ import Supplier from "../../models/Supplier";
 import { SupplierHistoryT } from "../../global.types";
 
 export default async function addQuantityProduct(req: Request, res: Response) {
-  const { due_amount, paid_amount, quantity } = req?.body
-    ?.supplierInvoice as SupplierHistoryT;
+  const adminId = req?.body?.adminId;
+
+  const { due_amount, paid_amount, quantity } = req?.body?.supplierInvoice;
 
   const supplierId = req?.body?.supplierId;
   const productId = req.body?.productId || 999999999999;
@@ -37,8 +38,11 @@ export default async function addQuantityProduct(req: Request, res: Response) {
     // @ts-ignore
     supplier.total_paid = supplier?.dataValues?.total_paid + paid_amount;
     // @ts-ignore
-    supplier.total_puchase_amount = supplier?.dataValues.total_puchase_amount + paid_amount + due_amount;
 
+    supplier.total_puchase_amount =
+      supplier?.dataValues.total_puchase_amount + paid_amount + due_amount;
+
+    await supplier?.save();
     // @ts-ignore
     // Create association with the single supplier
     supplierId && product.addSuppliers([supplierId]);
@@ -47,9 +51,10 @@ export default async function addQuantityProduct(req: Request, res: Response) {
       due_amount,
       paid_amount,
       quantity,
-      supplierId: product.dataValues.supplierId,
-      productId: product.dataValues.id,
       total_purchase_amount: Number(due_amount) + Number(paid_amount),
+      productId: product.dataValues.id,
+      supplierId,
+      userId: adminId,
     });
 
     res.status(201).json({

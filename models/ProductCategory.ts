@@ -26,7 +26,7 @@ ProductCategory.init(
     },
   },
   {
-    tableName: "ProductCategories",
+    tableName: "productcategories",
     sequelize,
   }
 );
