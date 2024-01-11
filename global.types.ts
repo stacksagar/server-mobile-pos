@@ -12,7 +12,7 @@ export interface ProductVariant {
   ram?: string;
   rom?: string;
   purchase_price?: number;
-  sale_price?: number;
+  sale_price?: number ;
 }
 
 export interface Common {
