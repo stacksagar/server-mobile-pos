@@ -8,6 +8,10 @@ import adminPanelRoutes from "../routes/admin.panel.routes";
 import supplierHistoryRoutes from "../routes/supplier.history.routes";
 import customerRoutes from "../routes/customer.routes";
 import barcodeRoutes from "../routes/barcode.routes";
+import vatRoutes from "../routes/vat.routes";
+import discountRoutes from "../routes/discount.routes";
+import paymentMethodRoutes from "../routes/payment.method.routes";
+import saleRoutes from "../routes/sale.routes";
 const router = Router();
 
 // external route start with "/api/__route_name"
@@ -21,6 +25,10 @@ router.use("/supplier", supplierRoutes);
 router.use("/supplier-history", supplierHistoryRoutes);
 router.use("/customer", customerRoutes);
 router.use("/barcode", barcodeRoutes);
+router.use("/vat", vatRoutes);
+router.use("/payment-method", paymentMethodRoutes);
+router.use("/discount", discountRoutes);
+router.use("/sale", saleRoutes);
 
 const externalRoutes = router;
 export default externalRoutes;

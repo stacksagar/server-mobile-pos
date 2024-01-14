@@ -1,5 +1,4 @@
 export type Roles = "user" | "custom" | "moderator" | "admin";
-type OrderStatus = "processing" | "delivered" | "canceled";
 
 export interface KeyValuePair {
   [key: string]: any;
@@ -12,7 +11,7 @@ export interface ProductVariant {
   ram?: string;
   rom?: string;
   purchase_price?: number;
-  sale_price?: number ;
+  sale_price?: number;
 }
 
 export interface Common {
@@ -29,18 +28,6 @@ export interface BrandT extends Common {
   name: string;
 }
 
-export interface DiscountT extends Common {
-  name?: string;
-  value: number;
-  type: "amount" | "percentage";
-}
-
-export interface VatT extends Common {
-  name: string;
-  value: number;
-  type: "amount" | "percentage";
-}
-
 export interface ExpenseT extends Common {
   name?: string;
   category?: string;
@@ -51,28 +38,9 @@ export interface ExpenseT extends Common {
 
 export interface PaymentT extends Common {
   name: string;
-  wallet: string;
+  wallet?: string;
   logo?: string;
   description?: string;
-}
-
-export interface SaleT extends Common {
-  invoiceID: number;
-  payAmount?: number;
-  saleAmount?: number;
-  purchaseAmount?: number;
-  status?: string;
-  discount?: number;
-  vat?: number;
-  product: ProductT;
-  user: UserT;
-  warranty?: WarrantyT;
-  method?: PaymentT;
-
-  name?: string;
-  address?: string;
-  phone?: string;
-  email?: string;
 }
 
 export interface SupplierHistoryT extends Common {
@@ -250,4 +218,32 @@ export interface BarcodeT extends Common {
 
   productId?: number;
   product?: ProductT;
+}
+
+export interface VatT extends Common {
+  name: string;
+  value: number;
+  type: "amount" | "percentage";
+}
+
+export interface DiscountT extends Common {
+  name: string;
+  value: number;
+  type: "amount" | "percentage";
+}
+
+export interface SaleT extends Common {
+  paid: number;
+  due: number;
+  discount: number;
+  vat: number;
+  quantity: number;
+  total: number;
+  method: string;
+  with_variant?: boolean;
+  properties?: object;
+  product?: ProductT;
+  customer?: UserT;
+  productId?: number;
+  customerId?: number;
 }

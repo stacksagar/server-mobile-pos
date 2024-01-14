@@ -14,6 +14,8 @@ import readStockOutProducts from "../controllers/product/read.stockout.products"
 import updateProduct from "../controllers/product/update.product";
 import readStockInAllProducts from "../controllers/product/read.stock.all.products";
 import addQuantityProduct from "../controllers/product/add.quantity.product";
+import occurredSaleProduct from "../controllers/product/occurred.sale.product";
+import returnProduct from "../controllers/product/return.product";
 const productRoutes = express.Router();
 
 // Category
@@ -31,6 +33,8 @@ productRoutes.get("/stock-in", readStockInProducts);
 productRoutes.get("/stock-out", readStockOutProducts);
 productRoutes.get("/:id", readProduct);
 productRoutes.put("/add-quantity", addQuantityProduct);
+productRoutes.put("/occurred-sale/:id", occurredSaleProduct);
+productRoutes.put("/return/:id", returnProduct);
 productRoutes.put("/:id", updateProduct);
 productRoutes.delete("/multiple", deleteProducts);
 productRoutes.delete("/:id", deleteProduct);
