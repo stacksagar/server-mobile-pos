@@ -5,13 +5,15 @@ export interface KeyValuePair {
 }
 
 export interface ProductVariant {
-  imei: string;
-  color?: string;
-  processor?: string;
-  ram?: string;
-  rom?: string;
-  purchase_price?: number;
-  sale_price?: number;
+  uid: string;
+  processor: string;
+  ram: string;
+  rom: string;
+  purchase_price: number;
+  sale_price: number;
+  imeis: {
+    [colorName: string]: string[];
+  };
 }
 
 export interface Common {

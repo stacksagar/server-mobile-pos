@@ -11,11 +11,13 @@ import deleteProducts from "../controllers/product/delete.products";
 import readProduct from "../controllers/product/read.product";
 import readStockInProducts from "../controllers/product/read.stock.products";
 import readStockOutProducts from "../controllers/product/read.stockout.products";
-import updateProduct from "../controllers/product/update.product";
+import updateProduct from "../controllers/product/updateProduct";
 import readStockInAllProducts from "../controllers/product/read.stock.all.products";
 import addQuantityProduct from "../controllers/product/add.quantity.product";
 import occurredSaleProduct from "../controllers/product/occurred.sale.product";
 import returnProduct from "../controllers/product/return.product";
+import removeProductIMEIs from "../controllers/product/remove.imeis.product";
+import returnProductIMEIs from "../controllers/product/return.imeis.product";
 const productRoutes = express.Router();
 
 // Category
@@ -34,6 +36,8 @@ productRoutes.get("/stock-out", readStockOutProducts);
 productRoutes.get("/:id", readProduct);
 productRoutes.put("/add-quantity", addQuantityProduct);
 productRoutes.put("/occurred-sale/:id", occurredSaleProduct);
+productRoutes.put("/remove-imeis/:id", removeProductIMEIs);
+productRoutes.put("/return-imeis/:id", returnProductIMEIs);
 productRoutes.put("/return/:id", returnProduct);
 productRoutes.put("/:id", updateProduct);
 productRoutes.delete("/multiple", deleteProducts);
