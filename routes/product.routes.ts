@@ -17,7 +17,7 @@ import addQuantityProduct from "../controllers/product/add.quantity.product";
 import occurredSaleProduct from "../controllers/product/occurred.sale.product";
 import returnProduct from "../controllers/product/return.product";
 import removeProductIMEIs from "../controllers/product/remove.imeis.product";
-import returnProductIMEIs from "../controllers/product/return.imeis.product";
+import returnProductIMEI from "../controllers/product/return.imei.product";
 const productRoutes = express.Router();
 
 // Category
@@ -37,7 +37,7 @@ productRoutes.get("/:id", readProduct);
 productRoutes.put("/add-quantity", addQuantityProduct);
 productRoutes.put("/occurred-sale/:id", occurredSaleProduct);
 productRoutes.put("/remove-imeis/:id", removeProductIMEIs);
-productRoutes.put("/return-imeis/:id", returnProductIMEIs);
+productRoutes.put("/return-imei/:id", returnProductIMEI);
 productRoutes.put("/return/:id", returnProduct);
 productRoutes.put("/:id", updateProduct);
 productRoutes.delete("/multiple", deleteProducts);

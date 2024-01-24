@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
 import error_res from "../../utils/error_res";
 import Product from "../../models/Product";
-import removeVariantsWithIMEIs from "../../utils/removeVariantsWithIMEIs";
+import returnVariant from "../../utils/returnVariant";
 
-export default async function returnProductIMEIs(req: Request, res: Response) {
+export default async function returnProductIMEI(req: Request, res: Response) {
   const id = req?.params?.id;
-  const imeis = req.body?.imei ? [req?.body?.imei] : req.body?.imeis || [];
-  const quantity = imeis?.length || 0;
+  const properties = req.body?.properties || {};
 
   try {
     const product = await Product.findOne({
@@ -14,20 +13,15 @@ export default async function returnProductIMEIs(req: Request, res: Response) {
     });
 
     // @ts-ignore
-    product.variants = removeVariantsWithIMEIs(
-      imeis,
-      // @ts-ignore
-      product?.variants
-    );
+    product.variants = returnVariant(product?.variants, properties);
 
-    // @ts-ignore
     const total_sale = product?.dataValues.total_sale || 0;
     const in_stock = product?.dataValues.in_stock || 0;
 
     // @ts-ignore
-    product.total_sale = total_sale + quantity;
+    product.total_sale = Math.max(total_sale - 1, 0);
     // @ts-ignore
-    product.in_stock = Math.max(in_stock - quantity, 0);
+    product.in_stock = in_stock + 1 || 0;
 
     await product?.save();
 
