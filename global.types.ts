@@ -32,10 +32,9 @@ export interface BrandT extends Common {
 
 export interface ExpenseT extends Common {
   name?: string;
-  category?: string;
+  category?: CategoryT;
   cost?: number;
   date?: string;
-  createdAt: string;
 }
 
 export interface PaymentT extends Common {

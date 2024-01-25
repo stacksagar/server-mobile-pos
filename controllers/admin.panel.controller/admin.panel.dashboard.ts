@@ -1,8 +1,30 @@
 import { Request, Response } from "express";
 import error_res from "../../utils/error_res";
+import ProductCategory from "../../models/ProductCategory";
+import ExpenseCategory from "../../models/ExpenseCategory";
+import Expense from "../../models/Expense";
+import Product from "../../models/Product";
+import User from "../../models/User";
+import Supplier from "../../models/Supplier";
+import Brand from "../../models/Brand";
 
-export default function adminDashboardController(req: Request, res: Response) {
+export default async function adminDashboardController(
+  req: Request,
+  res: Response
+) {
   try {
+    const p_categories = await ProductCategory.findAndCountAll();
+    const e_categories = await ExpenseCategory.findAndCountAll();
+    const products = await Product.findAndCountAll();
+    const expenses = await Expense.findAndCountAll();
+    const suppliers = await Supplier.findAndCountAll();
+    const brands = await Brand.findAndCountAll();
+    const customers = await User.findAndCountAll({
+      where: { is_customer: true },
+    });
+
+    const users = await User.findAndCountAll({ where: { is_customer: false } });
+
     let today_purchased = 0;
     let weekly_purchased = 0;
     let monthly_purchased = 0;
@@ -44,14 +66,14 @@ export default function adminDashboardController(req: Request, res: Response) {
 
     res.status(200).json({
       // From MODEL Data
-      total_products_categories: 0,
-      total_products: 0,
-      total_expenses_categories: 0,
-      total_expenses: 0,
-      total_suppliers: 0,
-      total_brands: 0,
-      total_customers: 0,
-      total_users: 0,
+      total_products_categories: p_categories.count,
+      total_expenses_categories: e_categories.count,
+      total_products: products.count,
+      total_expenses: expenses.count,
+      total_suppliers: suppliers.count,
+      total_brands: brands.count,
+      total_customers: customers.count,
+      total_users: users.count,
 
       // EXPENSE
       total_expenses_amount,
