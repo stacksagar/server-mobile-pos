@@ -7,6 +7,8 @@ import Product from "../../models/Product";
 import User from "../../models/User";
 import Supplier from "../../models/Supplier";
 import Brand from "../../models/Brand";
+import isTodayDate from "../../utils/isTodayDate";
+import SupplierHistory from "../../models/SupplierHistory";
 
 export default async function adminDashboardController(
   req: Request,
@@ -18,6 +20,7 @@ export default async function adminDashboardController(
     const products = await Product.findAndCountAll();
     const expenses = await Expense.findAndCountAll();
     const suppliers = await Supplier.findAndCountAll();
+    const suppliers_h = await SupplierHistory.findAndCountAll();
     const brands = await Brand.findAndCountAll();
     const customers = await User.findAndCountAll({
       where: { is_customer: true },
@@ -25,7 +28,13 @@ export default async function adminDashboardController(
 
     const users = await User.findAndCountAll({ where: { is_customer: false } });
 
-    let today_purchased = 0;
+    let today_purchased = suppliers_h.rows.reduce((acc, history) => {
+      if (isTodayDate(history.dataValues.createdAt)) {
+        return acc + history.dataValues.total_purchase_amount;
+      }
+
+      return acc;
+    }, 0);
     let weekly_purchased = 0;
     let monthly_purchased = 0;
     let prev_monthly_purchased = 0;
