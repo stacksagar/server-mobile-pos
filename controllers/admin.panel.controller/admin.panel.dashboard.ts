@@ -9,6 +9,11 @@ import Supplier from "../../models/Supplier";
 import Brand from "../../models/Brand";
 import isTodayDate from "../../utils/isTodayDate";
 import SupplierHistory from "../../models/SupplierHistory";
+import checkWeekEqual from "../../utils/checkWeekEqual";
+import checkMonthYearEqual from "../../utils/checkMonthYearEqual";
+import isPreviousMonth from "../../utils/isPreviousMonth";
+import checkLastYear from "../../utils/checkLastYear";
+import Sale from "../../models/Sale";
 
 export default async function adminDashboardController(
   req: Request,
@@ -21,6 +26,7 @@ export default async function adminDashboardController(
     const expenses = await Expense.findAndCountAll();
     const suppliers = await Supplier.findAndCountAll();
     const suppliers_h = await SupplierHistory.findAndCountAll();
+    const sales = await Sale.findAndCountAll();
     const brands = await Brand.findAndCountAll();
     const customers = await User.findAndCountAll({
       where: { is_customer: true },
@@ -28,13 +34,8 @@ export default async function adminDashboardController(
 
     const users = await User.findAndCountAll({ where: { is_customer: false } });
 
-    let today_purchased = suppliers_h.rows.reduce((acc, history) => {
-      if (isTodayDate(history.dataValues.createdAt)) {
-        return acc + history.dataValues.total_purchase_amount;
-      }
-
-      return acc;
-    }, 0);
+    // supplier/purchase histories
+    let today_purchased = 0;
     let weekly_purchased = 0;
     let monthly_purchased = 0;
     let prev_monthly_purchased = 0;
@@ -42,12 +43,51 @@ export default async function adminDashboardController(
     let running_purchased = 0;
     let total_purchased = 0;
 
+    suppliers_h.rows.forEach((row) => {
+      isTodayDate(row.dataValues.createdAt) &&
+        (today_purchased += row.dataValues.total_purchase_amount);
+
+      checkWeekEqual(row.dataValues.createdAt) &&
+        (weekly_purchased += row.dataValues.total_purchase_amount);
+
+      checkMonthYearEqual(row.dataValues.createdAt) &&
+        (monthly_purchased += row.dataValues.total_purchase_amount);
+
+      isPreviousMonth(row.dataValues.createdAt) &&
+        (prev_monthly_purchased += row.dataValues.total_purchase_amount);
+
+      checkLastYear(row.dataValues.createdAt) &&
+        (yearly_purchased += row.dataValues.total_purchase_amount);
+
+      total_purchased += row.dataValues.total_purchase_amount;
+    });
+
+    // sales
     let today_sales = 0;
     let weekly_sales = 0;
     let monthly_sales = 0;
     let prev_monthly_sales = 0;
     let yearly_sales = 0;
     let total_sales = 0;
+
+    sales.rows.forEach((row) => {
+      isTodayDate(row.dataValues.createdAt) &&
+        (today_sales += row.dataValues.total);
+
+      checkWeekEqual(row.dataValues.createdAt) &&
+        (weekly_sales += row.dataValues.total);
+
+      checkMonthYearEqual(row.dataValues.createdAt) &&
+        (monthly_sales += row.dataValues.total);
+
+      isPreviousMonth(row.dataValues.createdAt) &&
+        (prev_monthly_sales += row.dataValues.total);
+
+      checkLastYear(row.dataValues.createdAt) &&
+        (yearly_sales += row.dataValues.total);
+
+      total_sales += row.dataValues.total;
+    });
 
     let today_sales_profit = 0;
     let weekly_sales_profit = 0;
