@@ -3,9 +3,11 @@ import User from "../../models/User";
 import error_res from "../../utils/error_res";
 import Permission from "../../models/Permission";
 
-export default async function readUsers(_req: Request, res: Response) {
+export default async function readUser(req: Request, res: Response) {
+  const id = req.params?.id;
   try {
-    const users = await User.findAll({
+    const users = await User.findOne({
+      where: { id },
       include: [
         {
           model: Permission,
@@ -13,7 +15,6 @@ export default async function readUsers(_req: Request, res: Response) {
         },
       ],
     });
-    console.log("users", users);
     res.status(200).json(users);
   } catch (error) {
     error_res(res, error);

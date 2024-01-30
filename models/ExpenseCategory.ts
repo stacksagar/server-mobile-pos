@@ -31,9 +31,4 @@ ExpenseCategory.init(
   }
 );
 
-Expense.belongsTo(ExpenseCategory, {
-  foreignKey: "categoryId",
-  as: "category",
-});
-
 export default ExpenseCategory;

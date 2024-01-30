@@ -53,7 +53,7 @@ export interface PermissionT extends Common {
 
 export interface ExpenseT extends Common {
   name?: string;
-  category?: CategoryT;
+  category?: string;
   cost?: number;
   date?: string;
 }
