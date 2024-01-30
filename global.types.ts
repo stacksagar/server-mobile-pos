@@ -23,11 +23,32 @@ export interface Common {
 }
 
 export interface WarrantyT extends Common {
-  name: string;
+  customerId?: number;
+  brandId?: number;
+  productId?: number;
+  categoryId?: number;
+
+  customer?: UserT;
+  brand?: BrandT;
+  product?: ProductT;
+  category?: CategoryT;
+
+  receive_date: string;
+  delivery_date: string;
+  delivery_fee: number;
+  warranty_fee: number;
+  advance_amount: number;
+  due_amount: number;
+  description: string;
+  status: "courier" | "received" | "delivery" | "success";
 }
 
 export interface BrandT extends Common {
   name: string;
+}
+
+export interface PermissionT extends Common {
+  values: any[];
 }
 
 export interface ExpenseT extends Common {

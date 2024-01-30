@@ -6,6 +6,7 @@ import refreshController from "../controllers/auth/refresh";
 import createUser from "../controllers/auth/create.user";
 import updateUser from "../controllers/auth/update.user";
 import logoutController from "../controllers/auth/logout";
+import readModerators from "../controllers/auth/read.moderators";
 const authRoutes = express.Router();
 
 authRoutes.post("/signup", signupController);
@@ -16,6 +17,7 @@ authRoutes.get("/logout", logoutController);
 // users
 authRoutes.post("/user", createUser);
 authRoutes.get("/user/all", readUsers);
+authRoutes.get("/moderators/all", readModerators);
 authRoutes.put("/user/:id", updateUser);
 
 export default authRoutes;

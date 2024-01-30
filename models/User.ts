@@ -21,8 +21,6 @@ User.init(
       allowNull: true,
       defaultValue: 0,
     },
-    permissions: { type: DataTypes.JSON, allowNull: true },
-
     is_customer: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -59,6 +57,7 @@ CustomerHistory.belongsTo(User, {
   foreignKey: "userId",
   as: "user",
 });
+
 User.hasMany(CustomerHistory, { foreignKey: "userId", as: "histories" });
 
 export default User;

@@ -12,6 +12,8 @@ import vatRoutes from "../routes/vat.routes";
 import discountRoutes from "../routes/discount.routes";
 import paymentMethodRoutes from "../routes/payment.method.routes";
 import saleRoutes from "../routes/sale.routes";
+import brandRoutes from "../routes/brand.routes";
+import warrantyRoutes from "../routes/warranty.routes";
 const router = Router();
 
 // external route start with "/api/__route_name"
@@ -29,6 +31,8 @@ router.use("/vat", vatRoutes);
 router.use("/payment-method", paymentMethodRoutes);
 router.use("/discount", discountRoutes);
 router.use("/sale", saleRoutes);
+router.use("/brand", brandRoutes);
+router.use("/warranty", warrantyRoutes);
 
 const externalRoutes = router;
 export default externalRoutes;
