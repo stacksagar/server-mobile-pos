@@ -16,6 +16,7 @@ Sale.init(
     vat: { type: DataTypes.FLOAT, defaultValue: 0 },
     quantity: { type: DataTypes.FLOAT, defaultValue: 0 },
     total: { type: DataTypes.FLOAT, defaultValue: 0 },
+    total_purchase_cost: { type: DataTypes.FLOAT, defaultValue: 0 },
     method: { type: DataTypes.STRING, defaultValue: "cash" },
     with_variant: { type: DataTypes.BOOLEAN, defaultValue: false },
     properties: {

@@ -34,7 +34,7 @@ export default async function adminDashboardController(
 
     const users = await User.findAndCountAll({ where: { is_customer: false } });
 
-    // supplier/purchase histories
+    // supplier/purchase histories calculation
     let today_purchased = 0;
     let weekly_purchased = 0;
     let monthly_purchased = 0;
@@ -62,32 +62,13 @@ export default async function adminDashboardController(
       total_purchased += row.dataValues.total_purchase_amount;
     });
 
-    // sales
+    // sales calculation
     let today_sales = 0;
     let weekly_sales = 0;
     let monthly_sales = 0;
     let prev_monthly_sales = 0;
     let yearly_sales = 0;
     let total_sales = 0;
-
-    sales.rows.forEach((row) => {
-      isTodayDate(row.dataValues.createdAt) &&
-        (today_sales += row.dataValues.total);
-
-      checkWeekEqual(row.dataValues.createdAt) &&
-        (weekly_sales += row.dataValues.total);
-
-      checkMonthYearEqual(row.dataValues.createdAt) &&
-        (monthly_sales += row.dataValues.total);
-
-      isPreviousMonth(row.dataValues.createdAt) &&
-        (prev_monthly_sales += row.dataValues.total);
-
-      checkLastYear(row.dataValues.createdAt) &&
-        (yearly_sales += row.dataValues.total);
-
-      total_sales += row.dataValues.total;
-    });
 
     let today_sales_profit = 0;
     let weekly_sales_profit = 0;
@@ -96,22 +77,86 @@ export default async function adminDashboardController(
     let yearly_sales_profit = 0;
     let total_sales_profit = 0;
 
-    let total_expenses_amount = 0;
-    let today_expenses_amount = 0;
-    let this_month_expenses_amount = 0;
-    let prev_month_expenses_amount = 0;
-
-    let today_due_amount = 0;
-    let this_month_due_amount = 0;
-    let prev_month_due_amount = 0;
-    let total_due_amount = 0;
-
-    let total_supplier_due = 0;
-    let total_customer_due = 0;
-
     let weekly_vat_amount = 0;
     let monthly_vat_amount = 0;
     let yearly_vat_amount = 0;
+
+    sales.rows.forEach((row) => {
+      isTodayDate(row.dataValues.createdAt) &&
+        (today_sales += row.dataValues.total);
+      isTodayDate(row.dataValues.createdAt) &&
+        (today_sales_profit +=
+          row.dataValues.total - row?.dataValues.total_purchase_cost);
+
+      checkWeekEqual(row.dataValues.createdAt) &&
+        (weekly_vat_amount += row.dataValues.vat);
+      checkWeekEqual(row.dataValues.createdAt) &&
+        (weekly_sales += row.dataValues.total);
+      checkWeekEqual(row.dataValues.createdAt) &&
+        (weekly_sales_profit +=
+          row.dataValues.total - row?.dataValues.total_purchase_cost);
+
+      checkMonthYearEqual(row.dataValues.createdAt) &&
+        (monthly_vat_amount += row.dataValues.vat);
+      checkMonthYearEqual(row.dataValues.createdAt) &&
+        (monthly_sales += row.dataValues.total);
+      checkMonthYearEqual(row.dataValues.createdAt) &&
+        (monthly_sales_profit +=
+          row.dataValues.total - row?.dataValues.total_purchase_cost);
+
+      isPreviousMonth(row.dataValues.createdAt) &&
+        (prev_monthly_sales += row.dataValues.total);
+      isPreviousMonth(row.dataValues.createdAt) &&
+        (prev_monthly_sales_profit +=
+          row.dataValues.total - row?.dataValues.total_purchase_cost);
+
+      checkLastYear(row.dataValues.createdAt) &&
+        (yearly_vat_amount += row.dataValues.vat);
+      checkLastYear(row.dataValues.createdAt) &&
+        (yearly_sales += row.dataValues.total);
+      checkLastYear(row.dataValues.createdAt) &&
+        (yearly_sales_profit +=
+          row.dataValues.total - row?.dataValues.total_purchase_cost);
+
+      total_sales += row.dataValues.total;
+      total_sales_profit +=
+        row.dataValues.total - row?.dataValues.total_purchase_cost;
+    });
+
+    // expenses calculation
+    let today_expenses_amount = 0;
+    let weekly_expenses_amount = 0;
+    let this_month_expenses_amount = 0;
+    let prev_month_expenses_amount = 0;
+    let yearly_expenses_amount = 0;
+    let total_expenses_amount = 0;
+    expenses.rows.forEach((row) => {
+      isTodayDate(row.dataValues.createdAt) &&
+        (today_expenses_amount += row.dataValues.cost);
+
+      checkWeekEqual(row.dataValues.createdAt) &&
+        (weekly_expenses_amount += row.dataValues.cost);
+
+      checkMonthYearEqual(row.dataValues.createdAt) &&
+        (this_month_expenses_amount += row.dataValues.cost);
+
+      isPreviousMonth(row.dataValues.createdAt) &&
+        (prev_month_expenses_amount += row.dataValues.cost);
+
+      checkLastYear(row.dataValues.createdAt) &&
+        (yearly_expenses_amount += row.dataValues.cost);
+
+      total_expenses_amount += row.dataValues.cost;
+    });
+
+    let total_customer_due = 0;
+    let total_supplier_due = 0;
+    customers.rows.forEach((customer) => {
+      total_customer_due += customer.dataValues.due || 0;
+    });
+    suppliers.rows.forEach((supplier) => {
+      total_supplier_due += Number(supplier.dataValues.total_due || "0");
+    });
 
     res.status(200).json({
       // From MODEL Data
@@ -131,11 +176,6 @@ export default async function adminDashboardController(
       prev_month_expenses_amount,
 
       // DUE
-      today_due_amount,
-      this_month_due_amount,
-      prev_month_due_amount,
-      total_due_amount,
-
       total_supplier_due,
       total_customer_due,
 

@@ -54,7 +54,7 @@ export interface PermissionT extends Common {
 export interface ExpenseT extends Common {
   name?: string;
   category?: string;
-  cost?: number;
+  cost: number;
   date?: string;
 }
 
@@ -261,6 +261,7 @@ export interface SaleT extends Common {
   vat: number;
   quantity: number;
   total: number;
+  total_purchase_cost: number;
   method: string;
   with_variant?: boolean;
   properties?: object;
