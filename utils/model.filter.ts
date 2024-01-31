@@ -5,5 +5,7 @@ export default function modelFilter(req: Request, res: Response) {
   const limit = Number(req?.query?.limit || "10");
   const offset = limit * (page - 1);
 
-  return { page, limit, offset };
+  const conditions = {};
+
+  return { page, limit, offset, conditions };
 }
