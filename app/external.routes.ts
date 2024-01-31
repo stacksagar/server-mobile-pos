@@ -16,6 +16,7 @@ import brandRoutes from "../routes/brand.routes";
 import warrantyRoutes from "../routes/warranty.routes";
 import expenseRoutes from "../routes/expense.routes";
 import expenseCategoryRoutes from "../routes/expense.category.routes";
+import pageRoutes from "../routes/page.routes";
 const router = Router();
 
 // external route start with "/api/__route_name"
@@ -37,6 +38,7 @@ router.use("/brand", brandRoutes);
 router.use("/expense", expenseRoutes);
 router.use("/expense-category", expenseCategoryRoutes);
 router.use("/warranty", warrantyRoutes);
+router.use("/page", pageRoutes);
 
 const externalRoutes = router;
 export default externalRoutes;
