@@ -7,7 +7,8 @@
     "start": "node server.js",
     "dev": "npx ts-node-dev server.ts",
     "devcss": "postcss tailwind.css -o public/styles/styles.css -w",
-    "all": "npm-run-all --parallel dev devcss"
+    "all": "npm-run-all --parallel dev devcss",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
