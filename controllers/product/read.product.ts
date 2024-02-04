@@ -4,6 +4,7 @@ import ProductCategory from "../../models/ProductCategory";
 import Product from "../../models/Product";
 import Supplier from "../../models/Supplier";
 import SupplierHistory from "../../models/SupplierHistory";
+import Brand from "../../models/Brand";
 
 export default async function readProduct(req: Request, res: Response) {
   try {
@@ -20,6 +21,10 @@ export default async function readProduct(req: Request, res: Response) {
         {
           model: SupplierHistory,
           as: "histories",
+        },
+        {
+          model: Brand,
+          as: "brand",
         },
       ],
     });

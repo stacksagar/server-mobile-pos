@@ -5,6 +5,8 @@ import Product from "./Product";
 import ProductCategory from "./ProductCategory";
 import User from "./User";
 import Brand from "./Brand";
+import getParseIntoJSON from "../utils/getParseIntoJSON";
+import setStringifyJSON from "../utils/setStringifyJSON";
 
 class Warranty extends Model<WarrantyT> {}
 
@@ -29,6 +31,13 @@ Warranty.init(
     },
     due_amount: { type: DataTypes.FLOAT, allowNull: false, defaultValue: 0 },
     description: { type: DataTypes.STRING("255"), allowNull: true },
+
+    variant: {
+      type: DataTypes.TEXT("long"),
+      get: getParseIntoJSON("variant"),
+      set: setStringifyJSON("variant"),
+    },
+
     status: {
       type: DataTypes.ENUM("courier", "received", "delivery", "success"),
       defaultValue: "received",

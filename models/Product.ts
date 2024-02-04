@@ -61,12 +61,7 @@ Product.init(
       type: DataTypes.STRING("255"),
       allowNull: true,
     },
-
-    brand: {
-      type: DataTypes.STRING("50"),
-      allowNull: true,
-    },
-
+ 
     model: {
       type: DataTypes.STRING("50"),
       allowNull: true,
@@ -83,7 +78,7 @@ Product.init(
     },
 
     images: {
-      type: DataTypes.TEXT("long"),
+      type: DataTypes.JSON,
       allowNull: true,
       defaultValue: "[]",
       get: getParseIntoJSON("images"),
@@ -91,7 +86,7 @@ Product.init(
     },
 
     custom: {
-      type: DataTypes.TEXT("long"),
+      type: DataTypes.JSON,
       allowNull: true,
       defaultValue: "{}",
       get: getParseIntoJSON("custom"),
@@ -99,7 +94,7 @@ Product.init(
     },
 
     variants: {
-      type: DataTypes.TEXT("long"),
+      type: DataTypes.JSON,
       allowNull: true,
       defaultValue: "[]",
       get: getParseIntoJSON("variants"),

@@ -1,3 +1,5 @@
+import Brand from "./models/Brand";
+
 export type Roles = "user" | "custom" | "moderator" | "admin";
 
 export interface KeyValuePair {
@@ -40,6 +42,15 @@ export interface WarrantyT extends Common {
   advance_amount: number;
   due_amount: number;
   description: string;
+  variant: {
+    color: string | undefined;
+    imei: string;
+    ram: string;
+    rom: string;
+    processor: string;
+    price: number;
+    purchase_price: number;
+  };
   status: "courier" | "received" | "delivery" | "success";
 }
 
@@ -143,14 +154,16 @@ export interface ProductT extends Common {
   in_stock: number;
   thumbnail: string;
   barcode?: string;
-  brand?: string;
   model?: string;
   images?: string[];
-  categoryId?: number;
-  supplierId?: number;
   details?: string;
   description?: string;
+
+  categoryId?: number;
+  supplierId?: number;
+  brandId?: number;
   category?: CategoryT;
+  brand?: Brand;
   supplier?: SupplierT;
   variants?: ProductVariant[];
   custom?: KeyValuePair;
