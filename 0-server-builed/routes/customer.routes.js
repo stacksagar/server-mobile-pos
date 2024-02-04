@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const read_customers_1 = __importDefault(require("../controllers/auth/read.customers"));
+const create_customer_1 = __importDefault(require("../controllers/auth/create.customer"));
+const read_customer_1 = __importDefault(require("../controllers/auth/read.customer"));
+const delete_customer_1 = __importDefault(require("../controllers/auth/delete.customer"));
+const delete_customers_1 = __importDefault(require("../controllers/auth/delete.customers"));
+const update_customer_1 = __importDefault(require("../controllers/auth/update.customer"));
+const add_amount_customer_1 = __importDefault(require("../controllers/auth/add-amount.customer"));
+const add_paid_customer_1 = __importDefault(require("../controllers/auth/add-paid.customer"));
+const remove_amount_customer_1 = __importDefault(require("../controllers/auth/remove-amount.customer"));
+const customerRoutes = express_1.default.Router();
+customerRoutes.post("/", create_customer_1.default);
+customerRoutes.get("/all", read_customers_1.default);
+customerRoutes.get("/:id", read_customer_1.default);
+customerRoutes.put("/add-paid/:id", add_paid_customer_1.default);
+customerRoutes.put("/add-amount/:id", add_amount_customer_1.default);
+customerRoutes.put("/remove-amount/:id", remove_amount_customer_1.default);
+customerRoutes.put("/:id", update_customer_1.default);
+customerRoutes.delete("/multiple", delete_customers_1.default);
+customerRoutes.delete("/:id", delete_customer_1.default);
+exports.default = customerRoutes;

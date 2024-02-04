@@ -1,0 +1,24 @@
+<%-include("../../partials/header.ejs")-%>
+
+
+<section class="py-20 lg:py-32 flex justify-center items-center bg-gray-100 border">
+  <form action="/order/cancel-reason?orderId=<%=orderId%>" method="post" class="w-[95%] sm:w-[500px] mx-auto bg-white p-5 shadow border rounded space-y-6">
+
+    <h3>What is the reason for cancellation? </h3>
+
+    <div class="bg-gray-50 rounded p-2 shadow">
+      <label for="r1"> <input value="Mistakenly ordered!" name="reason" id="r1" type="radio"> Mistakenly ordered! </label>
+      <label for="r2"> <input value="I will order later!" name="reason" id="r2" type="radio"> I will order later! </label>
+      <label for="r3"> <input value="I don't have money right now!" name="reason" id="r3" type="radio"> I don't have money right now! </label>
+      <label for="r4"> <input value="Other" name="reason" id="r4" type="radio"> Other </label>
+    </div>
+
+    <textarea name="other" class="input min-h-[100px] p-3" placeholder="Write your reason here..."></textarea>
+
+    <button class="btn bg-orange-600 text-white"> Cancel </button>
+
+  </form>
+</section>
+
+
+<%-include("../../partials/footer.ejs")-%>

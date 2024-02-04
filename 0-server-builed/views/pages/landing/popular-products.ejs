@@ -1,0 +1,16 @@
+   <section class="section_gap bg-gray-50">
+     <div class="content">
+      <div class="flex justify-between items-center">
+        <h2 class="text-center xl:text-left">Popular Products</h2>
+        <a href="/items">View All</a>
+      </div> 
+       <br>
+       <div class="grid grid-cols-2 gap-4 lg:gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+
+         <% popular_products?.forEach(product => { %>
+         <%- include('../items/product-box.ejs', {product}) %>
+         <% }) %>
+
+       </div>
+     </div>
+   </section>

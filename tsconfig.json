@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "0-server-builed",
     "target": "ES2022",
     "module": "commonjs",
     "esModuleInterop": true,

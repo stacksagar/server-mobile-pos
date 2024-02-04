@@ -1,0 +1,62 @@
+<%-include("../../partials/header.ejs")-%>
+
+<div class="bg-gradient-to-r border-t from-gray-50 to-cyan-50 min-h-screen">
+  <div class="content">
+    <div class="w-full py-12 flex lg:items-start justify-start lg:justify-between gap-12 xl:gap-16 flex-col lg:flex-row text-gray-800">
+
+      <%- include('../../components/my-profile-sidebar.ejs', {active: "/my-profile"}) %>
+
+      <div class="bg-white shadow border w-full">
+        <div class="p-5">
+          <form action="/auth/update?id=<%=user?.id%>" method="post" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h3 class="col-span-full">Update Informations</h3>
+            <div class="col-span-full">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" class="input p-3" placeholder="Your Name" value="<%=user?.name%>" required>
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" class="input p-3" placeholder="Your Email" value="<%=user?.email%>" required>
+            </div>
+
+            <div>
+              <label for="phone">Phone/Mobile</label>
+              <input id="phone" name="phone" type="text" class="input p-3" placeholder="Your Phone/Mobile" value="<%=user?.phone%>">
+            </div>
+
+            <div class="col-span-full">
+
+              <label for="picture">
+                <img class="max-w-[48px] rounded-full" src="<%=user?.picture || 'https://res.cloudinary.com/dkxbkydf5/image/upload/v1689261143/avatar-_n0ydks.jpg'%>" alt="">
+                <span> Change Profile Picture </span>
+              </label>
+
+              </label>
+              <input class="input p-1" aria-describedby="picture" name="picture" id="picture" type="file">
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="picture">A profile picture is useful to confirm your are logged into your account</p>
+            </div>
+
+            <br>
+            <h5 class="col-span-full">Update Shipping Address/Info</h5>
+            <div>
+              <label for="city">City</label>
+              <input id="city" name="city" type="text" class="input p-3" placeholder="City" value="<%=user?.city%>">
+            </div>
+            <div>
+              <label for="postcode">Postal/ZIP Code</label>
+              <input id="postcode" name="postcode" type="text" class="input p-3" placeholder="Post/ZIP Code" value="<%=user?.postcode%>">
+            </div>
+            <div class="col-span-full">
+              <label for="address">Your Address</label>
+              <textarea id="address" name="address" type="text" class="input p-3" placeholder="Full Address"><%=user?.address%></textarea>
+            </div>
+            <button type="submit" data-ripple-light="true" class="btn btn-blue">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%-include("../../partials/footer.ejs")-%>
