@@ -23,3 +23,4 @@ const credentials = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default credentials;
+

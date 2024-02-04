@@ -4,4 +4,5 @@ export default function getParseIntoJSON(key = "") {
     return typeof data === "string" ? JSON.parse(data) : data;
   };
 }
+
 module.exports = getParseIntoJSON;

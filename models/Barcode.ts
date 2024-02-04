@@ -15,7 +15,7 @@ Barcode.init(
     },
 
     barcodes: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT("long"),
       get: getParseIntoJSON("barcodes"),
       set: setStringifyJSON("barcodes"),
     },

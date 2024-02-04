@@ -20,7 +20,7 @@ Sale.init(
     method: { type: DataTypes.STRING, defaultValue: "cash" },
     with_variant: { type: DataTypes.BOOLEAN, defaultValue: false },
     properties: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT("long"),
       get: getParseIntoJSON("properties"),
       set: setStringifyJSON("properties"),
     },

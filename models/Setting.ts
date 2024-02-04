@@ -9,13 +9,13 @@ class Setting extends Model<SettingT> {}
 Setting.init(
   {
     client: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT("long"),
       get: getParseIntoJSON("client"),
       set: setStringifyJSON("client"),
     },
 
     admin: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT("long"),
       get: getParseIntoJSON("admin"),
       set: setStringifyJSON("admin"),
     },

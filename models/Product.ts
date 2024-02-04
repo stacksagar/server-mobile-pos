@@ -83,7 +83,7 @@ Product.init(
     },
 
     images: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT("long"),
       allowNull: true,
       defaultValue: "[]",
       get: getParseIntoJSON("images"),
@@ -91,7 +91,7 @@ Product.init(
     },
 
     custom: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT("long"),
       allowNull: true,
       defaultValue: "{}",
       get: getParseIntoJSON("custom"),
@@ -99,7 +99,7 @@ Product.init(
     },
 
     variants: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT("long"),
       allowNull: true,
       defaultValue: "[]",
       get: getParseIntoJSON("variants"),

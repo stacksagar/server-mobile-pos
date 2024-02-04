@@ -11,7 +11,7 @@ class Permission extends Model<PermissionT> {}
 Permission.init(
   {
     values: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT("long"),
       get: getParseIntoJSON("values"),
       set: setStringifyJSON("values"),
     },
