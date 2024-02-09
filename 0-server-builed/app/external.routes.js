@@ -22,6 +22,7 @@ const warranty_routes_1 = __importDefault(require("../routes/warranty.routes"));
 const expense_routes_1 = __importDefault(require("../routes/expense.routes"));
 const expense_category_routes_1 = __importDefault(require("../routes/expense.category.routes"));
 const page_routes_1 = __importDefault(require("../routes/page.routes"));
+const tax_routes_1 = __importDefault(require("../routes/tax.routes"));
 const router = (0, express_1.Router)();
 // external route start with "/api/__route_name"
 router.get(`/health`, (_, res) => res.status(200).json({ message: "ok" }));
@@ -43,5 +44,6 @@ router.use("/expense", expense_routes_1.default);
 router.use("/expense-category", expense_category_routes_1.default);
 router.use("/warranty", warranty_routes_1.default);
 router.use("/page", page_routes_1.default);
+router.use("/tax", tax_routes_1.default);
 const externalRoutes = router;
 exports.default = externalRoutes;

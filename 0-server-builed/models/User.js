@@ -11,7 +11,7 @@ class User extends sequelize_1.Model {
 }
 User.init({
     name: { type: sequelize_1.DataTypes.STRING("255"), allowNull: false },
-    email: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true, unique: true },
+    email: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true },
     phone: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true },
     password: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true },
     picture: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true },

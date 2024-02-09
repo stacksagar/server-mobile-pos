@@ -3,13 +3,14 @@ import sequelize from "./connection";
 import { UserT } from "../global.types";
 import SupplierHistory from "./SupplierHistory";
 import CustomerHistory from "./CustomerHistory";
+import PaymentHistory from "./PaymentHistory";
 
 class User extends Model<UserT> {}
 
 User.init(
   {
     name: { type: DataTypes.STRING("255"), allowNull: false },
-    email: { type: DataTypes.STRING("255"), allowNull: true, unique: true },
+    email: { type: DataTypes.STRING("255"), allowNull: true },
     phone: { type: DataTypes.STRING("255"), allowNull: true },
     password: { type: DataTypes.STRING("255"), allowNull: true },
     picture: { type: DataTypes.STRING("255"), allowNull: true },
@@ -43,6 +44,7 @@ User.init(
   }
 );
 
+// Supplier History
 SupplierHistory.belongsTo(User, {
   foreignKey: "userId",
   as: "user",
@@ -53,11 +55,23 @@ User.hasMany(SupplierHistory, {
   as: "purchase_histories",
 });
 
+// Customer Histor
 CustomerHistory.belongsTo(User, {
   foreignKey: "userId",
   as: "user",
 });
 
 User.hasMany(CustomerHistory, { foreignKey: "userId", as: "histories" });
+
+// User with Payment History Relation
+User.hasMany(PaymentHistory, {
+  foreignKey: "userId",
+  as: "payment-histories",
+});
+
+PaymentHistory.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user",
+});
 
 export default User;

@@ -17,6 +17,8 @@ import warrantyRoutes from "../routes/warranty.routes";
 import expenseRoutes from "../routes/expense.routes";
 import expenseCategoryRoutes from "../routes/expense.category.routes";
 import pageRoutes from "../routes/page.routes";
+import taxRoutes from "../routes/tax.routes";
+import paymentHistoryRoutes from "../routes/payment.history.routes";
 const router = Router();
 
 // external route start with "/api/__route_name"
@@ -28,6 +30,7 @@ router.use("/product", productRoutes);
 router.use("/admin", adminPanelRoutes);
 router.use("/supplier", supplierRoutes);
 router.use("/supplier-history", supplierHistoryRoutes);
+router.use("/payment-history", paymentHistoryRoutes);
 router.use("/customer", customerRoutes);
 router.use("/barcode", barcodeRoutes);
 router.use("/vat", vatRoutes);
@@ -39,6 +42,7 @@ router.use("/expense", expenseRoutes);
 router.use("/expense-category", expenseCategoryRoutes);
 router.use("/warranty", warrantyRoutes);
 router.use("/page", pageRoutes);
+router.use("/tax", taxRoutes);
 
 const externalRoutes = router;
 export default externalRoutes;
