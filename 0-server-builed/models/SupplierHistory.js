@@ -8,6 +8,11 @@ const connection_1 = __importDefault(require("./connection"));
 class SupplierHistory extends sequelize_1.Model {
 }
 SupplierHistory.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     paid_amount: { type: sequelize_1.DataTypes.FLOAT, allowNull: true },
     due_amount: { type: sequelize_1.DataTypes.FLOAT, allowNull: true },
     total_purchase_amount: { type: sequelize_1.DataTypes.FLOAT, allowNull: true },

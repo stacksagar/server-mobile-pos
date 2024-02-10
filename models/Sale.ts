@@ -10,6 +10,11 @@ class Sale extends Model<SaleT> {}
 
 Sale.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     due: { type: DataTypes.FLOAT, defaultValue: 0 },
     paid: { type: DataTypes.FLOAT, defaultValue: 0 },
     discount: { type: DataTypes.FLOAT, defaultValue: 0 },

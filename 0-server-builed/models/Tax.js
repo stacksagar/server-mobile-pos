@@ -8,6 +8,11 @@ const connection_1 = __importDefault(require("./connection"));
 class Tax extends sequelize_1.Model {
 }
 Tax.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     name: { type: sequelize_1.DataTypes.STRING, allowNull: false },
     value: { type: sequelize_1.DataTypes.FLOAT, allowNull: false },
     description: { type: sequelize_1.DataTypes.STRING, allowNull: false },

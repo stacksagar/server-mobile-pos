@@ -8,6 +8,11 @@ class Setting extends Model<SettingT> {}
 
 Setting.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     client: {
       type: DataTypes.TEXT("long"),
       get: getParseIntoJSON("client"),

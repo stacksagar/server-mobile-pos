@@ -8,6 +8,11 @@ class Supplier extends Model<SupplierT> {}
 
 Supplier.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     supplier_name: { type: DataTypes.STRING("255"), allowNull: false },
     company_name: { type: DataTypes.STRING("255"), allowNull: true },
     address: { type: DataTypes.STRING("255"), allowNull: true },

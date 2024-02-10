@@ -6,9 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("./connection"));
 const SupplierHistory_1 = __importDefault(require("./SupplierHistory"));
+const PaymentHistory_1 = __importDefault(require("./PaymentHistory"));
 class Supplier extends sequelize_1.Model {
 }
 Supplier.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     supplier_name: { type: sequelize_1.DataTypes.STRING("255"), allowNull: false },
     company_name: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true },
     address: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true },
@@ -28,6 +34,15 @@ Supplier.hasMany(SupplierHistory_1.default, {
     as: "histories",
 });
 SupplierHistory_1.default.belongsTo(Supplier, {
+    foreignKey: "supplierId",
+    as: "supplier",
+});
+// Supplier with Payment History Relation
+Supplier.hasMany(PaymentHistory_1.default, {
+    foreignKey: "supplierId",
+    as: "payment-histories",
+});
+PaymentHistory_1.default.belongsTo(Supplier, {
     foreignKey: "supplierId",
     as: "supplier",
 });

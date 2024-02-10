@@ -11,6 +11,11 @@ const setStringifyJSON_1 = __importDefault(require("../utils/setStringifyJSON"))
 class Barcode extends sequelize_1.Model {
 }
 Barcode.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     barcode: {
         type: sequelize_1.DataTypes.STRING("250"),
         allowNull: true,

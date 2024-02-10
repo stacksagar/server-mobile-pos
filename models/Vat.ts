@@ -6,6 +6,12 @@ class Vat extends Model<VatT> {}
 
 Vat.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+
     name: { type: DataTypes.STRING, allowNull: false },
     value: { type: DataTypes.FLOAT, allowNull: false },
     type: {

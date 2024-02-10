@@ -9,6 +9,11 @@ class Barcode extends Model<BarcodeT> {}
 
 Barcode.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     barcode: {
       type: DataTypes.STRING("250"),
       allowNull: true,

@@ -7,6 +7,11 @@ class ExpenseCategory extends Model<CategoryT> {}
 
 ExpenseCategory.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     name: {
       type: DataTypes.STRING("40"),
       allowNull: false,

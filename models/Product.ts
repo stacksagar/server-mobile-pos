@@ -11,6 +11,11 @@ class Product extends Model<ProductT> {}
 
 Product.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     name: {
       type: DataTypes.STRING("255"),
       allowNull: true,
@@ -61,7 +66,7 @@ Product.init(
       type: DataTypes.STRING("255"),
       allowNull: true,
     },
- 
+
     model: {
       type: DataTypes.STRING("50"),
       allowNull: true,

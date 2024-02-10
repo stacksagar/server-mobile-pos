@@ -6,6 +6,11 @@ class Discount extends Model<DiscountT> {}
 
 Discount.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     name: { type: DataTypes.STRING, allowNull: false },
     value: { type: DataTypes.FLOAT, allowNull: false },
     type: {

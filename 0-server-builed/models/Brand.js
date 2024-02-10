@@ -9,6 +9,11 @@ const Product_1 = __importDefault(require("./Product"));
 class Brand extends sequelize_1.Model {
 }
 Brand.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     name: {
         type: sequelize_1.DataTypes.STRING("40"),
         allowNull: false,

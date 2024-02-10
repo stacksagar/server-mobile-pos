@@ -23,6 +23,7 @@ const expense_routes_1 = __importDefault(require("../routes/expense.routes"));
 const expense_category_routes_1 = __importDefault(require("../routes/expense.category.routes"));
 const page_routes_1 = __importDefault(require("../routes/page.routes"));
 const tax_routes_1 = __importDefault(require("../routes/tax.routes"));
+const payment_history_routes_1 = __importDefault(require("../routes/payment.history.routes"));
 const router = (0, express_1.Router)();
 // external route start with "/api/__route_name"
 router.get(`/health`, (_, res) => res.status(200).json({ message: "ok" }));
@@ -33,6 +34,7 @@ router.use("/product", product_routes_1.default);
 router.use("/admin", admin_panel_routes_1.default);
 router.use("/supplier", supplier_routes_1.default);
 router.use("/supplier-history", supplier_history_routes_1.default);
+router.use("/payment-history", payment_history_routes_1.default);
 router.use("/customer", customer_routes_1.default);
 router.use("/barcode", barcode_routes_1.default);
 router.use("/vat", vat_routes_1.default);

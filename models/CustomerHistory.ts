@@ -6,6 +6,11 @@ class CustomerHistory extends Model<SellHistoryT> {}
 
 CustomerHistory.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     paid: { type: DataTypes.FLOAT, allowNull: true, defaultValue: 0 },
     due: { type: DataTypes.FLOAT, allowNull: true, defaultValue: 0 },
     total: { type: DataTypes.FLOAT, allowNull: true, defaultValue: 0 },

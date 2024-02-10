@@ -5,23 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("./connection"));
-class Vat extends sequelize_1.Model {
+class PaymentHistory extends sequelize_1.Model {
 }
-Vat.init({
+PaymentHistory.init({
     id: {
         type: sequelize_1.DataTypes.INTEGER,
-        primaryKey: true,
         autoIncrement: true,
+        primaryKey: true,
     },
-    name: { type: sequelize_1.DataTypes.STRING, allowNull: false },
-    value: { type: sequelize_1.DataTypes.FLOAT, allowNull: false },
-    type: {
-        type: sequelize_1.DataTypes.ENUM("amount", "percentage"),
-        defaultValue: "amount",
-        allowNull: false,
-    },
+    paid_amount: { type: sequelize_1.DataTypes.FLOAT, allowNull: true, defaultValue: 0 },
+    due_amount: { type: sequelize_1.DataTypes.FLOAT, allowNull: true, defaultValue: 0 },
+    description: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true },
 }, {
-    tableName: "vats",
+    tableName: "paymenthistories",
     sequelize: connection_1.default,
 });
-exports.default = Vat;
+exports.default = PaymentHistory;

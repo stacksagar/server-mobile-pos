@@ -7,9 +7,15 @@ const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("./connection"));
 const SupplierHistory_1 = __importDefault(require("./SupplierHistory"));
 const CustomerHistory_1 = __importDefault(require("./CustomerHistory"));
+const PaymentHistory_1 = __importDefault(require("./PaymentHistory"));
 class User extends sequelize_1.Model {
 }
 User.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     name: { type: sequelize_1.DataTypes.STRING("255"), allowNull: false },
     email: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true },
     phone: { type: sequelize_1.DataTypes.STRING("255"), allowNull: true },
@@ -40,6 +46,7 @@ User.init({
     tableName: "users",
     sequelize: connection_1.default,
 });
+// Supplier History
 SupplierHistory_1.default.belongsTo(User, {
     foreignKey: "userId",
     as: "user",
@@ -48,9 +55,19 @@ User.hasMany(SupplierHistory_1.default, {
     foreignKey: "userId",
     as: "purchase_histories",
 });
+// Customer Histor
 CustomerHistory_1.default.belongsTo(User, {
     foreignKey: "userId",
     as: "user",
 });
 User.hasMany(CustomerHistory_1.default, { foreignKey: "userId", as: "histories" });
+// User with Payment History Relation
+User.hasMany(PaymentHistory_1.default, {
+    foreignKey: "userId",
+    as: "payment-histories",
+});
+PaymentHistory_1.default.belongsTo(User, {
+    foreignKey: "userId",
+    as: "user",
+});
 exports.default = User;

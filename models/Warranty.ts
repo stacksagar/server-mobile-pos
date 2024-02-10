@@ -12,6 +12,11 @@ class Warranty extends Model<WarrantyT> {}
 
 Warranty.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     receive_date: {
       type: DataTypes.STRING("255"),
       allowNull: true,

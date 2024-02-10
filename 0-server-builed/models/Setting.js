@@ -10,6 +10,11 @@ const getParseIntoJSON_1 = __importDefault(require("../utils/getParseIntoJSON"))
 class Setting extends sequelize_1.Model {
 }
 Setting.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     client: {
         type: sequelize_1.DataTypes.TEXT("long"),
         get: (0, getParseIntoJSON_1.default)("client"),

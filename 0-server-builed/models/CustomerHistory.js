@@ -8,6 +8,11 @@ const connection_1 = __importDefault(require("./connection"));
 class CustomerHistory extends sequelize_1.Model {
 }
 CustomerHistory.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     paid: { type: sequelize_1.DataTypes.FLOAT, allowNull: true, defaultValue: 0 },
     due: { type: sequelize_1.DataTypes.FLOAT, allowNull: true, defaultValue: 0 },
     total: { type: sequelize_1.DataTypes.FLOAT, allowNull: true, defaultValue: 0 },

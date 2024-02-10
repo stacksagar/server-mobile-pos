@@ -14,6 +14,11 @@ const setStringifyJSON_1 = __importDefault(require("../utils/setStringifyJSON"))
 class Warranty extends sequelize_1.Model {
 }
 Warranty.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     receive_date: {
         type: sequelize_1.DataTypes.STRING("255"),
         allowNull: true,

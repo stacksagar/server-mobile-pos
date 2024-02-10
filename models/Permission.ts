@@ -10,6 +10,11 @@ class Permission extends Model<PermissionT> {}
 
 Permission.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     values: {
       type: DataTypes.TEXT("long"),
       get: getParseIntoJSON("values"),

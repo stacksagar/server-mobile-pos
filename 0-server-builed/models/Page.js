@@ -8,6 +8,11 @@ const connection_1 = __importDefault(require("./connection"));
 class Page extends sequelize_1.Model {
 }
 Page.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     name: { type: sequelize_1.DataTypes.STRING("100"), allowNull: false },
     slug: { type: sequelize_1.DataTypes.STRING("150"), allowNull: false, unique: true },
     content: { type: sequelize_1.DataTypes.TEXT, allowNull: true },

@@ -11,6 +11,11 @@ const User_1 = __importDefault(require("./User"));
 class Permission extends sequelize_1.Model {
 }
 Permission.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     values: {
         type: sequelize_1.DataTypes.TEXT("long"),
         get: (0, getParseIntoJSON_1.default)("values"),

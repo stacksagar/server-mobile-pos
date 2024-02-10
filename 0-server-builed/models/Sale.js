@@ -12,6 +12,11 @@ const Product_1 = __importDefault(require("./Product"));
 class Sale extends sequelize_1.Model {
 }
 Sale.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     due: { type: sequelize_1.DataTypes.FLOAT, defaultValue: 0 },
     paid: { type: sequelize_1.DataTypes.FLOAT, defaultValue: 0 },
     discount: { type: sequelize_1.DataTypes.FLOAT, defaultValue: 0 },
